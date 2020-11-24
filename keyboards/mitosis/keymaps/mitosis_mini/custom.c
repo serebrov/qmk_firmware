@@ -18,7 +18,6 @@ enum mitosis_layers
 #define LONGPRESS_DELAY 150
 #define LAYER_TOGGLE_DELAY 300
 
-
 void matrix_scan_user(void) {
     uint8_t layer = biton32(layer_state);
 
@@ -30,10 +29,10 @@ void matrix_scan_user(void) {
             set_led_blue;
             break;
         case _NAV:
-            set_led_white;
+            set_led_magenta;
             break;
         case _FN:
-            set_led_green;
+            set_led_red;
             break;
         case _NUM:
             set_led_yellow;
