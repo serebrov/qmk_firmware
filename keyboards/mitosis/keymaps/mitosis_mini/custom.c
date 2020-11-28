@@ -26,22 +26,22 @@ void matrix_scan_user(void) {
             set_led_off;
             break;
         case _SYM:
-            set_led_blue;
+            set_led_off;
             break;
         case _NAV:
-            set_led_magenta;
+            set_led_off;
             break;
         case _FN:
-            set_led_red;
+            set_led_magenta;
             break;
         case _NUM:
-            set_led_yellow;
+            set_led_blue;
             break;
         case _MEDIA:
-            set_led_cyan;
+            set_led_red;
             break;
         case _ADJUST:
-            set_led_magenta;
+            set_led_red;
             break;
         case _ALERT:
             set_led_red;
