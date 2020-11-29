@@ -34,7 +34,7 @@
             "KC_B",
             "KC_N",
             "KC_M",
-            "LALT(KC_COMM)",
+            "LALT_T(KC_COMM)",
             "KC_DOT",
             "KC_SLSH",
             "KC_VOLU",
