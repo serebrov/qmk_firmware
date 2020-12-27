@@ -2,6 +2,10 @@
 
 ```
 qmk flash -kb boardsource/microdox -km cole -bl dfu
+
+# Later changed to explicitely set Elite-C part as right
+# qmk flash -kb boardsource/microdox -km cole -bl dfu-split-right
+# (and similarly, for the pro-micro, used -bl avrdude-split-left)
 ```
 
     Compiling keymap with make boardsource/microdox:cole:dfu
@@ -45,6 +49,8 @@ qmk flash -kb boardsource/microdox -km cole -bl dfu
 Note: without the `-bl dfu` parameter, nothing bad happens, it just waiting for the controller and can not find it.
 
 Note: to reset the controller without the reset button, use RST and GND pins (there are two near each other on one side), connect them with tweezers.
+
+On the board, double press the reset button to put the controller into the flashing mode.
 
 ## Flashing Pro Micro
 
@@ -118,3 +124,5 @@ New one, not flashed before - flashing whent on immediately, no reset was needed
     avrdude done.  Thank you.
 
 On the next flash, the RST+GND reset was needed (as expected).
+
+On the board, double press the reset button to put the controller into the flashing mode.
