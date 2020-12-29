@@ -262,7 +262,10 @@ void oled_task_user(void) {
   if (isLeftHand) {
     render_logo();
     render_rgb_status();
-    oled_scroll_left();
+    // When scroll is enabled, the RGB status is not refreshing,
+    // only rendered once and updated after disconnecting and
+    // connecting the keyboard back.
+    // oled_scroll_left();
   } else {
     render_status();
   }
