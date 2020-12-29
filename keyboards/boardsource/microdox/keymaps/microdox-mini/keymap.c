@@ -125,33 +125,33 @@ static void render_logo(void) {
 static void render_status(void) {
    switch (get_highest_layer(layer_state)) {
     case _QWERTY:
-      oled_write_P(PSTR("B R L A O\n"), false);
+      oled_write_P(PSTR("B S N F N M O\n"), false);
       oled_write_P(PSTR("^\n"), false);
       oled_write_P(PSTR("Layer: Base\n"), false);
       break;
     case _SYM:
-      oled_write_P(PSTR("B R L A O\n"), false);
+      oled_write_P(PSTR("B S N F N M O\n"), false);
       oled_write_P(PSTR("  ^\n"), false);
       oled_write_P(PSTR("Layer: Sym\n"), false);
       break;
     case _NAV:
-      oled_write_P(PSTR("B R L A O\n"), false);
+      oled_write_P(PSTR("B S N F N M O\n"), false);
       oled_write_P(PSTR("    ^\n"), false);
       oled_write_P(PSTR("Layer: Nav\n"), false);
       break;
     case _FN:
-      oled_write_P(PSTR("B R L A O\n"), false);
+      oled_write_P(PSTR("B S N F N M O\n"), false);
       oled_write_P(PSTR("      ^\n"), false);
       oled_write_P(PSTR("Layer: FN\n"), false);
       break;
     case _NUM:
-      oled_write_P(PSTR("B R L A O\n"), false);
-      oled_write_P(PSTR("      ^\n"), false);
+      oled_write_P(PSTR("B S N F N M O\n"), false);
+      oled_write_P(PSTR("        ^\n"), false);
       oled_write_P(PSTR("Layer: Num\n"), false);
       break;
     case _MOUSE:
-      oled_write_P(PSTR("B R L A O\n"), false);
-      oled_write_P(PSTR("      ^\n"), false);
+      oled_write_P(PSTR("B S N F N M O\n"), false);
+      oled_write_P(PSTR("          ^\n"), false);
       oled_write_P(PSTR("Layer: Mouse\n"), false);
       break;
     /* case _ADJUST: */
@@ -160,8 +160,8 @@ static void render_status(void) {
     /*   oled_write_P(PSTR("Layer: Adjust\n"), false); */
     /*   break; */
     default:
-      oled_write_P(PSTR("B R L A O"), false);
-      oled_write_P(PSTR("        ^\n"), false);
+      oled_write_P(PSTR("B S N F N M O\n"), false);
+      oled_write_P(PSTR("            ^\n"), false);
       oled_write_P(PSTR("Layer: Other\n"), false);
   }
 }
