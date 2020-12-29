@@ -134,71 +134,133 @@ void render_rgb_status(void) {
       switch (rgblight_get_mode() ) {
           // See quantum/rgblight.h for the list of modes.
           case RGBLIGHT_MODE_STATIC_LIGHT:
-              oled_write_P( PSTR("      LIGHT"), false);
+              oled_write_P( PSTR("      LIGHT        "), false);
               break;
           case RGBLIGHT_MODE_BREATHING:
+              oled_write_P( PSTR("      BREATHING    "), false);
+              break;
           case RGBLIGHT_MODE_BREATHING + 1:
+              oled_write_P( PSTR("      BREATHING 1  "), false);
+              break;
           case RGBLIGHT_MODE_BREATHING + 2:
+              oled_write_P( PSTR("      BREATHING 2  "), false);
+              break;
           case RGBLIGHT_MODE_BREATHING + 3:
-              oled_write_P( PSTR("      BREATHING"), false);
+              oled_write_P( PSTR("      BREATHING 3  "), false);
               break;
           case RGBLIGHT_MODE_RAINBOW_MOOD:
+              oled_write_P( PSTR("      RAINB_MOOD   "), false);
+              break;
           case RGBLIGHT_MODE_RAINBOW_MOOD + 1:
+              oled_write_P( PSTR("      RAINB_MOOD 1 "), false);
+              break;
           case RGBLIGHT_MODE_RAINBOW_MOOD + 2:
-              oled_write_P( PSTR("      RAINB_MOOD"), false);
+              oled_write_P( PSTR("      RAINB_MOOD 2 "), false);
               break;
           case RGBLIGHT_MODE_RAINBOW_SWIRL:
+              oled_write_P( PSTR("      RAINB_SWIRL  "), false);
+              break;
           case RGBLIGHT_MODE_RAINBOW_SWIRL + 1:
+              oled_write_P( PSTR("      RAINB_SWIRL 1"), false);
+              break;
           case RGBLIGHT_MODE_RAINBOW_SWIRL + 2:
+              oled_write_P( PSTR("      RAINB_SWIRL 2"), false);
+              break;
           case RGBLIGHT_MODE_RAINBOW_SWIRL + 3:
+              oled_write_P( PSTR("      RAINB_SWIRL 3"), false);
+              break;
           case RGBLIGHT_MODE_RAINBOW_SWIRL + 4:
+              oled_write_P( PSTR("      RAINB_SWIRL 4"), false);
+              break;
           case RGBLIGHT_MODE_RAINBOW_SWIRL + 5:
-              oled_write_P( PSTR("      RAINB_SWIRL"), false);
+              oled_write_P( PSTR("      RAINB_SWIRL 5"), false);
               break;
           case RGBLIGHT_MODE_SNAKE:
+              oled_write_P( PSTR("      SNAKE        "), false);
+              break;
           case RGBLIGHT_MODE_SNAKE + 1:
+              oled_write_P( PSTR("      SNAKE 1      "), false);
+              break;
           case RGBLIGHT_MODE_SNAKE + 2:
+              oled_write_P( PSTR("      SNAKE 2      "), false);
+              break;
           case RGBLIGHT_MODE_SNAKE + 3:
+              oled_write_P( PSTR("      SNAKE 3      "), false);
+              break;
           case RGBLIGHT_MODE_SNAKE + 4:
+              oled_write_P( PSTR("      SNAKE 4      "), false);
+              break;
           case RGBLIGHT_MODE_SNAKE + 5:
-              oled_write_P( PSTR("      SNAKE"), false);
+              oled_write_P( PSTR("      SNAKE 5      "), false);
               break;
           case RGBLIGHT_MODE_KNIGHT:
+              oled_write_P( PSTR("      KNIGHT       "), false);
+              break;
           case RGBLIGHT_MODE_KNIGHT + 1:
+              oled_write_P( PSTR("      KNIGHT 1     "), false);
+              break;
           case RGBLIGHT_MODE_KNIGHT + 2:
-              oled_write_P( PSTR("      KNIGHT"), false);
+              oled_write_P( PSTR("      KNIGHT 2     "), false);
               break;
           case RGBLIGHT_MODE_CHRISTMAS:
-              oled_write_P( PSTR("      XMAS"), false);
+              oled_write_P( PSTR("      X-MAS        "), false);
               break;
           case RGBLIGHT_MODE_STATIC_GRADIENT:
+              oled_write_P( PSTR("      GRADIENT     "), false);
+              break;
           case RGBLIGHT_MODE_STATIC_GRADIENT + 1:
+              oled_write_P( PSTR("      GRADIENT 1   "), false);
+              break;
           case RGBLIGHT_MODE_STATIC_GRADIENT + 2:
+              oled_write_P( PSTR("      GRADIENT 2   "), false);
+              break;
           case RGBLIGHT_MODE_STATIC_GRADIENT + 3:
+              oled_write_P( PSTR("      GRADIENT 3   "), false);
+              break;
           case RGBLIGHT_MODE_STATIC_GRADIENT + 4:
+              oled_write_P( PSTR("      GRADIENT 4   "), false);
+              break;
           case RGBLIGHT_MODE_STATIC_GRADIENT + 5:
+              oled_write_P( PSTR("      GRADIENT 5   "), false);
+              break;
           case RGBLIGHT_MODE_STATIC_GRADIENT + 6:
+              oled_write_P( PSTR("      GRADIENT 6   "), false);
+              break;
           case RGBLIGHT_MODE_STATIC_GRADIENT + 7:
+              oled_write_P( PSTR("      GRADIENT 7   "), false);
+              break;
           case RGBLIGHT_MODE_STATIC_GRADIENT + 8:
+              oled_write_P( PSTR("      GRADIENT 8   "), false);
+              break;
           case RGBLIGHT_MODE_STATIC_GRADIENT + 9:
-              oled_write_P( PSTR("      GRADIENT"), false);
+              oled_write_P( PSTR("      GRADIENT 9   "), false);
               break;
           case RGBLIGHT_MODE_ALTERNATING:
-              oled_write_P( PSTR("      ALTERNATING"), false);
+              oled_write_P( PSTR("      ALTERNATING  "), false);
               break;
           case RGBLIGHT_MODE_TWINKLE:
+              oled_write_P( PSTR("      TWINKLE      "), false);
+              break;
           case RGBLIGHT_MODE_TWINKLE + 1:
+              oled_write_P( PSTR("      TWINKLE 1    "), false);
+              break;
           case RGBLIGHT_MODE_TWINKLE + 2:
+              oled_write_P( PSTR("      TWINKLE 2    "), false);
+              break;
           case RGBLIGHT_MODE_TWINKLE + 3:
+              oled_write_P( PSTR("      TWINKLE 3    "), false);
+              break;
           case RGBLIGHT_MODE_TWINKLE + 4:
+              oled_write_P( PSTR("      TWINKLE 4    "), false);
+              break;
           case RGBLIGHT_MODE_TWINKLE + 5:
-              oled_write_P( PSTR("      TWINKLE"), false);
+              oled_write_P( PSTR("      TWINKLE 5    "), false);
               break;
           case RGBLIGHT_MODE_RGB_TEST:
-              oled_write_P( PSTR("      TEST"), false);
+              oled_write_P( PSTR("      TEST         "), false);
               break;
           default:
-              oled_write_P( PSTR("      OTHER"), false);
+              oled_write_P( PSTR("      OTHER        "), false);
               break;
       }
     }
