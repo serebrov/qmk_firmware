@@ -101,10 +101,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 #ifdef OLED_DRIVER_ENABLE
+/* oled_rotation_t oled_init_user(oled_rotation_t rotation) { */
+/*   if (!is_keyboard_master()) */
+/*     return OLED_ROTATION_180; */
+/*   return rotation; */
+/* } */
+
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-  if (!is_keyboard_master())
-    return OLED_ROTATION_180;
-  return rotation;
+    return isLeftHand ? OLED_ROTATION_180 : OLED_ROTATION_0;
+}
 }
 
 static void render_logo(void) {
