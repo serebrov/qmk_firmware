@@ -132,34 +132,66 @@ void render_rgb_status(void) {
 
     if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) {
       switch (rgblight_get_mode() ) {
+          // See quantum/rgblight.h for the list of modes.
           case RGBLIGHT_MODE_STATIC_LIGHT:
               oled_write_P( PSTR("      LIGHT"), false);
               break;
           case RGBLIGHT_MODE_BREATHING:
+          case RGBLIGHT_MODE_BREATHING + 1:
+          case RGBLIGHT_MODE_BREATHING + 2:
+          case RGBLIGHT_MODE_BREATHING + 3:
               oled_write_P( PSTR("      BREATHING"), false);
               break;
           case RGBLIGHT_MODE_RAINBOW_MOOD:
+          case RGBLIGHT_MODE_RAINBOW_MOOD + 1:
+          case RGBLIGHT_MODE_RAINBOW_MOOD + 2:
               oled_write_P( PSTR("      RAINB_MOOD"), false);
               break;
           case RGBLIGHT_MODE_RAINBOW_SWIRL:
+          case RGBLIGHT_MODE_RAINBOW_SWIRL + 1:
+          case RGBLIGHT_MODE_RAINBOW_SWIRL + 2:
+          case RGBLIGHT_MODE_RAINBOW_SWIRL + 3:
+          case RGBLIGHT_MODE_RAINBOW_SWIRL + 4:
+          case RGBLIGHT_MODE_RAINBOW_SWIRL + 5:
               oled_write_P( PSTR("      RAINB_SWIRL"), false);
               break;
           case RGBLIGHT_MODE_SNAKE:
+          case RGBLIGHT_MODE_SNAKE + 1:
+          case RGBLIGHT_MODE_SNAKE + 2:
+          case RGBLIGHT_MODE_SNAKE + 3:
+          case RGBLIGHT_MODE_SNAKE + 4:
+          case RGBLIGHT_MODE_SNAKE + 5:
               oled_write_P( PSTR("      SNAKE"), false);
               break;
           case RGBLIGHT_MODE_KNIGHT:
+          case RGBLIGHT_MODE_KNIGHT + 1:
+          case RGBLIGHT_MODE_KNIGHT + 2:
               oled_write_P( PSTR("      KNIGHT"), false);
               break;
           case RGBLIGHT_MODE_CHRISTMAS:
               oled_write_P( PSTR("      XMAS"), false);
               break;
           case RGBLIGHT_MODE_STATIC_GRADIENT:
+          case RGBLIGHT_MODE_STATIC_GRADIENT + 1:
+          case RGBLIGHT_MODE_STATIC_GRADIENT + 2:
+          case RGBLIGHT_MODE_STATIC_GRADIENT + 3:
+          case RGBLIGHT_MODE_STATIC_GRADIENT + 4:
+          case RGBLIGHT_MODE_STATIC_GRADIENT + 5:
+          case RGBLIGHT_MODE_STATIC_GRADIENT + 6:
+          case RGBLIGHT_MODE_STATIC_GRADIENT + 7:
+          case RGBLIGHT_MODE_STATIC_GRADIENT + 8:
+          case RGBLIGHT_MODE_STATIC_GRADIENT + 9:
               oled_write_P( PSTR("      GRADIENT"), false);
               break;
           case RGBLIGHT_MODE_ALTERNATING:
               oled_write_P( PSTR("      ALTERNATING"), false);
               break;
           case RGBLIGHT_MODE_TWINKLE:
+          case RGBLIGHT_MODE_TWINKLE + 1:
+          case RGBLIGHT_MODE_TWINKLE + 2:
+          case RGBLIGHT_MODE_TWINKLE + 3:
+          case RGBLIGHT_MODE_TWINKLE + 4:
+          case RGBLIGHT_MODE_TWINKLE + 5:
               oled_write_P( PSTR("      TWINKLE"), false);
               break;
           case RGBLIGHT_MODE_RGB_TEST:
