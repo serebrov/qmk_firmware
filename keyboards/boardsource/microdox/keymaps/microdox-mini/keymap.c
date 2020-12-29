@@ -110,6 +110,66 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return isLeftHand ? OLED_ROTATION_180 : OLED_ROTATION_0;
 }
+
+/* uint32_t mode; */
+void render_rgb_status(void) {
+
+    /* if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) { */
+    /*     snprintf(buf, sizeof(buf), " RGB %2d: %d,%d,%d ", */
+    /*              rgblight_get_mode(), */
+    /*              rgblight_get_hue()/RGBLIGHT_HUE_STEP, */
+    /*              rgblight_get_sat()/RGBLIGHT_SAT_STEP, */
+    /*              rgblight_get_val()/RGBLIGHT_VAL_STEP); */
+    /*     oled_write(buf, false); */
+    /* } else { */
+    /*     oled_write_P( PSTR("\n"), false); */
+    /* } */
+
+    /* if (mode != rgblight_get_mode()) { */
+    /*   oled_clear(); */
+    /* } */
+    /* mode = rgblight_get_mode(); */
+
+    if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) {
+      switch (rgblight_get_mode() ) {
+          case RGBLIGHT_MODE_STATIC_LIGHT:
+              oled_write_P( PSTR("      LIGHT"), false);
+              break;
+          case RGBLIGHT_MODE_BREATHING:
+              oled_write_P( PSTR("      BREATHING"), false);
+              break;
+          case RGBLIGHT_MODE_RAINBOW_MOOD:
+              oled_write_P( PSTR("      RAINB_MOOD"), false);
+              break;
+          case RGBLIGHT_MODE_RAINBOW_SWIRL:
+              oled_write_P( PSTR("      RAINB_SWIRL"), false);
+              break;
+          case RGBLIGHT_MODE_SNAKE:
+              oled_write_P( PSTR("      SNAKE"), false);
+              break;
+          case RGBLIGHT_MODE_KNIGHT:
+              oled_write_P( PSTR("      KNIGHT"), false);
+              break;
+          case RGBLIGHT_MODE_CHRISTMAS:
+              oled_write_P( PSTR("      XMAS"), false);
+              break;
+          case RGBLIGHT_MODE_STATIC_GRADIENT:
+              oled_write_P( PSTR("      GRADIENT"), false);
+              break;
+          case RGBLIGHT_MODE_ALTERNATING:
+              oled_write_P( PSTR("      ALTERNATING"), false);
+              break;
+          case RGBLIGHT_MODE_TWINKLE:
+              oled_write_P( PSTR("      TWINKLE"), false);
+              break;
+          case RGBLIGHT_MODE_RGB_TEST:
+              oled_write_P( PSTR("      TEST"), false);
+              break;
+          default:
+              oled_write_P( PSTR("      OTHER"), false);
+              break;
+      }
+    }
 }
 
 static void render_logo(void) {
@@ -167,12 +227,20 @@ static void render_status(void) {
 }
 
 void oled_task_user(void) {
-  if (is_keyboard_master()) {
-    render_status();
-  } else {
+  if (isLeftHand) {
     render_logo();
+    render_rgb_status();
     oled_scroll_left();
+  } else {
+    render_status();
   }
+  /* if (is_keyboard_master()) { */
+  /*   render_status(); */
+  /* } else { */
+  /*   /1* render_logo(); *1/ */
+  /*   render_rgb_status(); */
+  /*   oled_scroll_left(); */
+  /* } */
 }
 
 #endif
