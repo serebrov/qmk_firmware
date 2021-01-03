@@ -18,6 +18,9 @@ enum mitosis_layers
 #define LONGPRESS_DELAY 150
 #define LAYER_TOGGLE_DELAY 300
 
+// const uint16_t PROGMEM esc_combo[] = {KC_J, KC_K, COMBO_END};
+// combo_t key_combos[COMBO_COUNT] = {COMBO(esc_combo, KC_ESC)};
+
 void matrix_scan_user(void) {
     uint8_t layer = biton32(layer_state);
 

@@ -2,6 +2,9 @@
 
 #define AUTO_SHIFT_TIMEOUT 125
 
+// #define COMBO_COUNT 1
+// #define COMBO_TERM 50
+
 // https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-force-hold
 //
 // TLDR: tap force hold is good to have OFF (default) when dual-function keys are used,
