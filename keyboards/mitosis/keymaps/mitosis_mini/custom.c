@@ -20,6 +20,21 @@ enum mitosis_layers
 
 // const uint16_t PROGMEM esc_combo[] = {KC_J, KC_K, COMBO_END};
 // combo_t key_combos[COMBO_COUNT] = {COMBO(esc_combo, KC_ESC)};
+enum combo_events {
+  JK_ESC,
+  DF_TAB,
+  COMBO_LENGTH
+};
+uint16_t COMBO_LEN = COMBO_LENGTH;
+
+const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
+const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
+
+combo_t key_combos[] = {
+  [JK_ESC] = COMBO(jk_combo, KC_ESC),
+  [DF_TAB] = COMBO(df_combo, KC_TAB)
+};
+
 
 void matrix_scan_user(void) {
     uint8_t layer = biton32(layer_state);
