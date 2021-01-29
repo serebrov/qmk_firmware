@@ -15,9 +15,6 @@ enum mitosis_layers
 	_ALERT
 };
 
-#define LONGPRESS_DELAY 150
-#define LAYER_TOGGLE_DELAY 300
-
 enum tapdance_events {
     CT_SE,
     CT_CLN,
