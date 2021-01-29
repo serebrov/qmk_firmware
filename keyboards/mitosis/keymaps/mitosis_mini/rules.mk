@@ -6,6 +6,7 @@ AUTO_SHIFT_ENABLE = yes
 # Combos do not work with autoshift
 # https://github.com/qmk/qmk_firmware/issues/8136
 COMBO_ENABLE=yes
+TAP_DANCE_ENABLE=yes
 
 AUDIO_ENABLE = no # audio output
 FAUXCLICKY_ENABLE = no
