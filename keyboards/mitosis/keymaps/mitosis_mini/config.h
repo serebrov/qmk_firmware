@@ -1,5 +1,6 @@
 #pragma once
 
+#define TAPPING_TERM 125
 #define AUTO_SHIFT_TIMEOUT 125
 
 // #define COMBO_COUNT 1
