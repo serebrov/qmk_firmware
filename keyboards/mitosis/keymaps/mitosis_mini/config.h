@@ -1,6 +1,19 @@
 #pragma once
 
+// I set shorter TAPPING_TERM to have it the same as autoshift timeout.
+// This way u / U / : / ; (tap-dance) has the same delay to produce U
+// as AutoShift (and tap dance relies on TAPPING_TERM to decide on hold state).
+// Negative effcts are:
+// - It is harder to use GUI/Enter: I should hit Enter faster to aviod triggering
+// GUI. This could be solved with RETRO_TAPPING enabled.
+// - It is harder to use OSM Ctrl: looks like I usually hold it for longer time than
+// 125ms
+// - It is harder to use spaces (as they are also Mod-Taps), should also be solved
+// with RETRO_TAPPING
+// Anyway, it could either get used to this or enable RETRO_TAPPING.
 #define TAPPING_TERM 125
+#define RETRO_TAPPING
+
 #define AUTO_SHIFT_TIMEOUT 125
 
 // #define COMBO_COUNT 1
