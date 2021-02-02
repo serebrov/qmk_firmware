@@ -80,6 +80,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   layer = biton32(layer_state);  // get the current layer
 
   //custom layer handling for tri_layer,
+  //Note: The LAYER_TOGGLE_DELAY is used for custom timer to turn off the layer
   switch (keycode) {
   case FNKEY:
   	if (record->event.pressed) {
@@ -110,6 +111,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     update_tri_layer(_FUNCTION, _SHIFTED, _FUNCSHIFT);
   	return false;
   	break;
+
+  //Note: other cases here are used to implement a kind of tap dance for media keys.
+  //Here we have Tap vs Hold action (defined by LONGPRESS_DELAY).
+  //
   //switch multiplexing for media, short tap for volume up, long press for play/pause
   case M_VOLU:
       if (record->event.pressed) {
