@@ -11,10 +11,15 @@
 // - It is harder to use spaces (as they are also Mod-Taps), should also be solved
 // with RETRO_TAPPING
 // Anyway, it could either get used to this or enable RETRO_TAPPING.
-#define TAPPING_TERM 125
-#define RETRO_TAPPING
+// #define TAPPING_TERM 125
+// #define RETRO_TAPPING
 
 #define AUTO_SHIFT_TIMEOUT 125
+
+#define PERMISSIVE_HOLD
+// This is to support Alt on "," key, without this rolling
+// presses of ,j produce ∆ (this is Alt + j on Mac).
+#define IGNORE_MOD_TAP_INTERRUPT
 
 // #define COMBO_COUNT 1
 // #define COMBO_TERM 50
