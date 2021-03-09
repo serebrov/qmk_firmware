@@ -36,15 +36,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * Base Layer: QWERTY
  *
+ * General design considerations:
+ *
+ * - Based on Auto-Shift (hold the key longer to access the shifted version)
+ * - Mods are on thumbs
+ * - Special keys (Esc, Tab, etc) are on stronger fingers instead of pinky
+ * - Symmetric: Space and Sym keys are both on the left and right, so it is possible to alter hands when typing
+ *   - For example, to enter -, tap Sym on the left and `j` on the right.
+ *   - Or use right space when typing "test test " ("t" is on the left, space is on the right) and use
+ *   left space for "key key" ("y" is on the right, space is on the left)
+ * - Main mods (Ctrl, Sym, Shift are one-shot)
+ *
+ * Notes:
+ *
+ * - Most important layers are base and Sym that give access to letters, numbers and symbols.
+ * - Enter is on the right in the middle row and ; is moved to the Sym layer.
+ * - Another essential layer is Nav where there are Tab, Esc, Backspace, Arrow keys and other navigation stuff, it is available by
+ *   holding left Space key (arrows are on the right, backspace is by tapping the right space while holding left)
+ * - There is an OSL Shift on the right, but it is just for backup, the Shift key is not needed in most cases due to AutoShift.
+ * - Main mods (Sym layer, Ctrl and Shift) are one-shot - we can tap it without holding and it will be applied to the next keypress.
+ * - The `.` is a dual-function Alt (Alt on hold, dot on tap). Currently QMK does not support Auto-Shift for dual-function
+ * keys, but this is not important since shifted "." is "<" which is available on the Sym layer (on the left).
+ *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |RAIS/ESC|   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  | \   |
+ * |        |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |Ctrl/BS |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
+ * |        |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | Enter|        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  |LShift|LShift|  |LShift|LShift|   N  |   M  | ,  < | . >  | /  ? |  - _   |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | GUI  | Del  | Enter| Space| Esc  |  | Enter| Space| Tab  | Bksp | AltGr|
- *                        |      |      | Alt  | Lower| Raise|  | Lower| Raise|      |      |      |
+ * |        |   Z  |   X  |   C  |   V  |   B  |      |      |  |      |      |   N  |   M  |   ,  | . Alt|   /  |        |
+ * `----------------------+------+------+------+ Space|Space |  |Space | Space+------+------+------+----------------------'
+ *                        |      | OSM  | OSL  |      |      |  |      |      | OSL  | OSL  |      |
+ *                        |      | CTRL | Sym  | Nav  |Adjust|  |Adjust| Mouse| Sym  | Shift|      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
@@ -54,17 +76,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_NO, OSM(MOD_LCTL), OSL(1), LT(2,KC_SPC), LT(_ADJUST,KC_SPC),       LT(_ADJUST,KC_SPC), LT(5,KC_SPC), OSL(1), OSM(MOD_RSFT), KC_NO
     ),
 /*
- * Lower Layer: Symbols
+ * Sym Layer: Numbers and Symbols
+ * 
+ * Note: !@#$% anD ^&*() are available via AutoShift + numbers.
+ *
+ * Note: Bottom row has shifted versions of the symbols from the middle row. So it can be empty with
+ * shifted versions of symbols entered via AutoShift, but I find it a bit faster and more convenient
+ * the way it is, it is also easy to remember since this is how it works on a regular keyboard.
+ * Exception are angle brackets (`<` and `>`) that are under parentesis (`(` and `)`) on the left.
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  !   |  @   |  {   |  }   |  |   |                              |      |      |      |      |      |  | \   |
+ * |        |  1   |  2   |  3   |  4   |  5   |                              |   6  |  7   |  8   |  9   |  0   |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  #   |  $   |  (   |  )   |  `   |                              |   +  |  -   |  /   |  *   |  %   |  ' "   |
+ * |        |  `   |  (   |  )   |  '   |  =   |                              |   \  |  -   |  [   |  ]   |  ;   |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |  %   |  ^   |  [   |  ]   |  ~   |      |      |  |      |      |   &  |  =   |  ,   |  .   |  / ? | - _    |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |  ;   |  =   |  |  =   |  ;   |      |      |      |
- *                        |      |      |      |      |      |  |      |      |      |      |      |
+ * |        |  ~   |  <   |  >   |  "   |  +   |      |      |  |      |      |   |  |  _   |  {   |  }   |  :   |        |
+ * `----------------------+------+------+------+ Space|Space |  |Space | Space+------+------+------+----------------------'
+ *                        |      | OSM  | OSL  |      |      |  |      |      | OSL  | OSL  |      |
+ *                        |      | CTRL | Sym  | Nav  |Adjust|  |Adjust| Mouse| Sym  | Shift|      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_SYM] = LAYOUT(
@@ -74,17 +103,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  _______, KC_TRNS, KC_TRNS, KC_BSPC, _______,  _______,  KC_BSPC, KC_TRNS, KC_TRNS, _______
     ),
 /*
- * Raise Layer: Number keys, media, navigation
+ * Nav Layer: Arrows, Tab, Esc, Backspace and window-management shortcuts.
+ *
+ * Note: the Nav layer is available while holding the left Space key, I find it quite easy to access main navigation keys:
+ * - Left Space + F = Tab
+ * - Left Space + G = Esc
+ * - Left Space + Right Space = Backspace
+ * - Left Space + B = CapsLock (I use it as an input language switch)
+ * - Left Space + hjkl = Arrows
+ *
+ * Note: I use GUI+1,2,3,4,5 to switch between virtual desktops a I use GUI+O to show the floating terminal - these
+ * are the shortcuts on the right side.
+ *
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |   1  |  2   |  3   |  4   |  5   |                              |  6   |  7   |  8   |  9   |  0   |        |
+ * |        |GUI+1 |GUI+2 |GUI+3 |GUI+4 |GUI+5 |                              | Home | PgUp |PgDown| END  |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |      | Prev | Play | Next | VolUp|                              | Left | Down | Up   | Right|      |        |
+ * |        |      |      |GUI+O | Tab  | Esc  |                              | Left | Down | Up   | Right|      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |      | Mute | VolDn|      |      |  |      |      | MLeft| Mdown| MUp  |MRight|      |        |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |      |      |      |      |
- *                        |      |      |      |      |      |  |      |      |      |      |      |
+ * |        |      |      |      | Del  | Caps |      |      |  |      |      |A-Left|      |      |A-Right|      |        |
+ * `----------------------+------+------+------+ Space|Space |  |Space | Space+------+------+------+----------------------'
+ *                        |      | OSM  | OSL  |      |      |  |      |      | OSL  | OSL  |      |
+ *                        |      | CTRL | Sym  | Nav  |Adjust|  |Adjust| Mouse| Sym  | Shift|      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_NAV] = LAYOUT(
@@ -93,50 +133,87 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, KC_NO, KC_NO, KC_NO, KC_DEL, KC_CAPS,        _______, _______, _______, _______, LALT(KC_LEFT), KC_NO, KC_NO, RALT(KC_RGHT), KC_NO, _______,
                                  _______, KC_TRNS, KC_TRNS, KC_TRNS, _______, _______, KC_BSPC, KC_TRNS, KC_TRNS, _______
     ),
+/*
+ * Fn Layer: function keys (on the left), the layer is accessed by holding right Sym and J.
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |        |  F1  |  F2  |  F3  |  F4  |  F5  |                              |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |        |  F6  |  F7  |  F8  |  F9  | F10  |                              |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |        |      |      |      |  F11 | F12  |      |      |  |      |      |      |      |      |      |      |        |
+ * `----------------------+------+------+------+ Space|Space |  |Space | Space+------+------+------+----------------------'
+ *                        |      | OSM  | OSL  |      |      |  |      |      | OSL  | OSL  |      |
+ *                        |      | CTRL | Sym  | Nav  |Adjust|  |Adjust| Mouse| Sym  | Shift|      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
     [_FN] = LAYOUT(
       _______, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                                               KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    _______,
       _______, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10,                                              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, _______,
       _______, KC_TRNS, KC_TRNS, KC_TRNS, KC_F11, KC_F12,   _______, _______, _______, _______, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, _______,
                                  _______, KC_TRNS, KC_TRNS, KC_TRNS, _______, _______, KC_BSPC, KC_TRNS, KC_TRNS, _______
     ),
+/*
+ * Num Layer: numpad (on the right), the layer is accessed by holding left Sym and F.
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |        |      |      |      |      |      |                              |   *  |   7  |   8  |   9  |  /   |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |        |      |      |      |      |  F   |                              |   -  |   4  |   5  |   6  |  ;   |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |      |  |      |      |   =  |   3  |   2  |   1  |  +   |        |
+ * `----------------------+------+------+------+ Space|Space |  |Space | Space+------+------+------+----------------------'
+ *                        |      | OSM  | OSL  |      |      |  |      |      |   0  |   .  |      |
+ *                        |      | CTRL | Sym  | Nav  |Adjust|  |Adjust| Mouse|      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
     [_NUM] = LAYOUT(
-      _______, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                     KC_PAST, KC_P7, KC_P8, KC_P9, KC_PSLS,    _______,
+      _______, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                     KC_PAST, KC_P7, KC_P8, KC_P9, KC_PSLS, _______,
       _______, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                     KC_PMNS, KC_P4, KC_P5, KC_P6, KC_TRNS, _______,
       _______, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, _______, _______, _______, _______, KC_PEQL, KC_P1, KC_P2, KC_P3, KC_PPLS, _______,
                                  _______, KC_TRNS, KC_TRNS, KC_TRNS, _______, _______, KC_TRNS, KC_P0, KC_PDOT, _______
     ),
+/*
+ * Mouse Layer: mouse keys (on the right, WASD-style), mouse wheel keys (on the left, WASD) the layer is accessed by holding right space.
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |        |      |      |MW Dwn|      |      |                              |      |      | M Up|        |      |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+-------+------+--------|
+ * |        |      |MW Lft|MW Up |MW Rgt|      |                              |      |M Left|M Down|M Right|      |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+-------+------+--------|
+ * |        |      |      |      |      |      |      |      |  |      |      |      |      |      |       |      |        |
+ * `----------------------+------+------+------+      |Space |  |Space | Space+------+------+------+-----------------------'
+ *                        |      | OSM  | Mouse| Mouse|      |  |      |      | OSL  | OSL  |      |
+ *                        |      | CTRL | Btn 1| Btn2 |Adjust|  |Adjust| Mouse| Sym  | Shift|      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
     [_MOUSE] = LAYOUT(
-      _______, RGB_TOG, RGB_MODE_FORWARD, KC_WH_D, KC_NO, KC_NO,                                KC_NO, KC_NO, KC_MS_U, KC_NO, KC_PSCR,    _______,
-      _______, KC_NO, KC_WH_L, KC_WH_U, KC_WH_R, KC_NO,                                         KC_NO, KC_MS_L, KC_MS_D, KC_MS_R, KC_NO, _______,
-      _______, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           _______, _______, _______, _______, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, _______,
-                                 _______, KC_TRNS, KC_BTN1, KC_BTN2, _______, _______, KC_TRNS, KC_TRNS, KC_TRNS, _______
+      _______, KC_NO, KC_NO,   KC_WH_D, KC_NO, KC_NO,                                      KC_NO, KC_NO, KC_MS_U, KC_NO, KC_PSCR,  _______,
+      _______, KC_NO, KC_WH_L, KC_WH_U, KC_WH_R, KC_NO,                                    KC_NO, KC_MS_L, KC_MS_D, KC_MS_R, KC_NO, _______,
+      _______, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,      _______, _______, _______, _______, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, _______,
+                            _______, KC_TRNS, KC_BTN1, KC_BTN2, _______, _______, KC_TRNS, KC_TRNS, KC_TRNS, _______
     ),
+/*
+ * Adjust Layer: keyboard settings, adjusted by holding inner thumb keys (inner Space).
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |RGB Mode|RGB Tog|RGB Next|     |     |     |                              |      |      |      |      |      |        |
+ * |--------+-------+--------+-----+-----+-----|                              |------+------+------+------+------+--------|
+ * |Hue Inc |Hue Dec|        |     |     |     |                              |      |      |      |      |      |        |
+ * |--------+-------+--------+-----+-----+-----+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |        |       |        |     |     |     |      |      |  |      |      |      |      |      |      |      |        |
+ * `----------------------+------+------+------+      |Space |  |Space | Space+------+------+------+----------------------'
+ *                        |      | OSM  | Mouse| Mouse|      |  |      |      | OSL  | OSL  |      |
+ *                        |      | CTRL | Btn 1| Btn2 |Adjust|  |Adjust| Mouse| Sym  | Shift|      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
     [_ADJUST] = LAYOUT(
-      RGB_RMOD,RGB_TOG, RGB_MODE_FORWARD, KC_NO, KC_NO, KC_NO,                                 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,    _______,
+      RGB_RMOD,RGB_TOG, RGB_MODE_FORWARD, KC_NO, KC_NO, KC_NO,                                 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, _______,
       RGB_HUI, RGB_HUD, KC_NO, KC_NO, KC_NO, KC_NO,                                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, _______,
       RGB_SAI, RGB_SAD, KC_NO, KC_NO, KC_NO, KC_NO,        _______, _______, _______, _______, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, _______,
                                  _______, KC_TRNS, KC_TRNS, KC_TRNS, _______, _______, KC_TRNS, KC_TRNS, KC_TRNS, _______
     ),
 /*
- * Adjust Layer: Function keys, RGB
- *
- * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        | F1   |  F2  | F3   | F4   | F5   |                              | F6   | F7   |  F8  | F9   | F10  |        |
- * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        | TOG  | SAI  | HUI  | VAI  | MOD  |                              |      |      |      | F11  | F12  |        |
- * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      | SAD  | HUD  | VAD  | RMOD |      |      |  |      |      |      |      |      |      |      |        |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |      |      |      |      |
- *                        |      |      |      |      |      |  |      |      |      |      |      |
- *                        `----------------------------------'  `----------------------------------'
- */
-    /* [_ADJUST] = LAYOUT( */
-    /*   _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                       KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______, */
-    /*   _______, RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD,                                     _______, _______, _______, KC_F11,  KC_F12,  _______, */
-    /*   _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD,_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, */
-    /*                              _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ */
-    /* ), */
 // /*
 //  * Layer template
 //  *
