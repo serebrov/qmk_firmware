@@ -1,3 +1,3 @@
 #!/bin/bash
 
-qmk flash -kb mitosis -km mitosis_mini
+./bin/qmk flash -kb mitosis -km mitosis_mini
