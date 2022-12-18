@@ -1,3 +1,7 @@
+# Fork note
+
+My changes are on the [custom branch](https://github.com/serebrov/qmk_firmware/compare/master...serebrov:qmk_firmware:custom).
+
 # Quantum Mechanical Keyboard Firmware
 
 [![Current Version](https://img.shields.io/github/tag/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/tags)
