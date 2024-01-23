@@ -26,7 +26,7 @@
         "cols": ["C6", "D7", "E6", "B4", "B5"],
         "rows": ["B1", "B3", "B2", "B6"]
     },
-    "diode_direction": "ROW2COL",
+    "diode_direction": "COL2ROW",
     "split": {
         "enabled": true,
         "soft_serial_pin": "D0"
