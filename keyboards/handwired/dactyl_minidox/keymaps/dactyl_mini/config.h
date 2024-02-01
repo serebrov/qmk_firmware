@@ -14,6 +14,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// https://www.stlfinder.com/model/dactyl-36-key-minidox-EZsvbKhP/4318876/
+// https://blog.jfedor.org/2020/11/dactyl-manuform-build-log.html
+// https://github.com/jfedor2/qmk_firmware
+
 #pragma once
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
@@ -27,6 +31,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // For some reason I had to change this parameter
 // Note: the original change is in the ../../info.json
 #define DIODE_DIRECTION COL2ROW
+
+// #define RGB_DI_PIN D3
+// #define RGBLED_NUM 12
+
 // Without this there is no communication via TRRS, left half works,
 // but the right half doesn't (if not connected via a second USB cable).
 #define SPLIT_USB_DETECT
